@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Проверка статуса заявки";
+}
+<h4>@ViewBag.Title</h4>
+
+<p class="alert-info">
+    @ViewBag.Message
+</p>
+@if(ViewBag.Documents != null)
+{
+    <p>Перечень бумажных документов, которую необходимо вам донести:</p>
+    <ul class="alert-warning">
+        @foreach(var docName in ViewBag.Documents)
+        {
+            <li>@docName</li>
+        }
+    </ul>
+}

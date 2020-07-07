@@ -1,0 +1,225 @@
+﻿@model ChildrenAdoptionApi.Controllers.CreateESPOrphanController.CreateESPOrphanViewModel
+@{
+    ViewBag.Title = "Подача заявки на получение выплаты ЕСП детям сиротам";
+}
+@section styles {
+    @Styles.Render("~/chosen_v1.8.2/css")
+}
+<h4>@ViewBag.Title</h4>
+
+<p>
+    Данный сервис позволяет сформировать и направить электронную заявку на получение ЕСП родителю ребенка, потерявшего одного из родителей.
+</p>
+
+<p>
+    В случае если заявителем выступает доверенное лицо или опекун/попечитель ребенка, то ему нужно лично обратиться в территориальное подразделение соответствующего района проживания с предоставлением нотариально заверенной доверенности или решения суда о назначении опекуна/попечителя.
+</p>
+
+<p>
+    Для получения ЕСП с учетом коэффициента надбавок к социальным пособиям для детей, проживающих в условиях высокогорья, заявитель также должен очно обратиться в территориальное подразделение соответствующего района.
+</p>
+@if (ViewBag.Error != null)
+{
+    <div class="text-danger">
+        @ViewBag.Error
+    </div>
+}
+@if (ViewBag.Message != null)
+{
+    <h4 class="text-success">
+        @ViewBag.Message
+    </h4>
+    @Html.ActionLink("Проверить статус", "GetStatus", new { pin = Model.ApplicantPIN }, new { @class = "btn btn-info" })
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("ActionNo", Model.ActionNo)
+    <div style="padding:5px; margin: 0px auto">
+        @Html.TextBoxFor(model => model.ChildPIN, new { @class = "form-control", placeholder = "ПИН ребенка" })
+        @Html.TextBoxFor(model => model.ApplicantPIN, new { @class = "form-control", placeholder = "ПИН заявителя" })
+        @Html.TextBoxFor(model => model.PassportSeries, new { @class = "form-control", placeholder = "ID / AN" })
+        @Html.TextBoxFor(model => model.PassportNo, new { @class = "form-control", placeholder = "Номер паспорта" })
+        @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control", placeholder = "Телефон" })
+        @Html.DropDownList("DistrictId")
+        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Нас. пункт, ул, дом" })
+        @if (Model.ActionNo == 1)
+        {
+            <button type="submit" class="btn btn-primary">СФОРМИРОВАТЬ ЗАЯВКУ</button>
+        }
+        @if (Model.ActionNo == 2)
+        {
+            <button id="completeBtn" type="submit" class="btn btn-success">ОТПРАВИТЬ</button>
+        }
+    </div>
+
+    <table class="table table-hover table-striped" style="max-width: 800px;">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    ГРС-ПАСПОРТ
+                </th>
+                <th>
+                    Гражданин
+                </th>
+            </tr>
+        </thead>
+        @if (Model.passportPerson != null)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        ПИН
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.pin)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Фамилия
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.surname)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Имя
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Отчество
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.patronymic)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Дата рождения
+                    </td>
+                    <td>
+                        @Model.passportPerson.dateOfBirth.ToString("dd.MM.yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Национальность
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.nationality)
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">ПАСПОРТ</th>
+                </tr>
+                <tr>
+                    <td>
+                        Выдавший орган
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.passportAuthority)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Срок действия
+                    </td>
+                    <td>
+                        С @Model.passportPerson.issuedDate.ToString("dd.MM.yyyy") по @Model.passportPerson.expiredDate.ToString("dd.MM.yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Область / район
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressRegion)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Нас. пункт
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressLocality)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Улица
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressStreet)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Дом
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressHouse)
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <table class="table table-hover table-striped" style="max-width: 800px;">
+        @if (Model.msecData != null)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        МСЭК
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.msecData.OrganizationName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Дата освидетельствования
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.msecData.ExaminationDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Группа
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.msecData.DisabilityGroup)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Тип
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.msecData.ExaminationType)
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+
+@section scripts{
+    @Scripts.Render("~/chosen_v1.8.2/js")
+    <script>
+        $(function () {
+            $('#DistrictId').addClass('form-control').chosen();
+            $('#completeBtn').click(function (e) {
+                e.preventDefault();
+                $('#ActionNo').val(2);
+                $('form').submit();
+            });
+        })
+    </script>
+}

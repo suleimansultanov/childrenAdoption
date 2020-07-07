@@ -1,0 +1,270 @@
+﻿@model ChildrenAdoptionApi.Controllers.CreateAppViewModel
+@{
+    ViewBag.Title = "Подача заявки на получение заключения о возможности быть усыновителем";
+}
+@section styles {
+    @Styles.Render("~/chosen_v1.8.2/css")
+}
+<h4>@ViewBag.Title</h4>
+@if (ViewBag.Error != null)
+{
+    <div class="text-danger">
+        @ViewBag.Error
+    </div>
+}
+@if (ViewBag.Message != null)
+{
+    <h4 class="text-success">
+        @ViewBag.Message
+    </h4>
+    @Html.ActionLink("Проверить статус", "GetStatus", new { pin = Model.ApplicantPIN }, new { @class = "btn btn-info" })
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("ActionNo", Model.ActionNo)
+    <div style="padding:5px; margin: 0px auto">
+        @Html.TextBoxFor(model => model.ApplicantPIN, new { @class = "form-control", placeholder = "ПИН заявителя" })
+        @Html.TextBoxFor(model => model.PassportSeries, new { @class = "form-control", placeholder = "ID / AN" })
+        @Html.TextBoxFor(model => model.PassportNo, new { @class = "form-control", placeholder = "Номер паспорта" })
+        @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control", placeholder = "Телефон" })
+        @Html.DropDownList("DistrictId")
+        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Нас. пункт, ул, дом" })
+        @if (Model.ActionNo == 1)
+        {
+            <button type="submit" class="btn btn-primary">СФОРМИРОВАТЬ ЗАЯВКУ</button>
+        }
+        @if (Model.ActionNo == 2)
+        {
+            <button id="completeBtn" type="submit" class="btn btn-success">ОТПРАВИТЬ</button>
+        }
+    </div>
+
+    <table class="table table-hover table-striped" style="max-width: 800px;">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    ГРС-ПАСПОРТ
+                </th>
+                <th>
+                    Гражданин
+                </th>
+            </tr>
+        </thead>
+        @if (Model.passportPerson != null)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        ПИН
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.pin)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Фамилия
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.surname)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Имя
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.name)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Отчество
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.patronymic)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Дата рождения
+                    </td>
+                    <td>
+                        @Model.passportPerson.dateOfBirth.ToString("dd.MM.yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Национальность
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.nationality)
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">ПАСПОРТ</th>
+                </tr>
+                <tr>
+                    <td>
+                        Выдавший орган
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.passportAuthority)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Срок действия
+                    </td>
+                    <td>
+                        С @Model.passportPerson.issuedDate.ToString("dd.MM.yyyy") по @Model.passportPerson.expiredDate.ToString("dd.MM.yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Область / район
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressRegion)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Нас. пункт
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressLocality)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Улица
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressStreet)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Дом
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.passportPerson.addressHouse)
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+    <table class="table table-hover table-striped" style="max-width: 800px;">
+        <thead>
+            <tr class="text-center">
+                <th>
+                    ЗАГС
+                </th>
+                <th>
+                    МУЖ
+                </th>
+                <th>
+                    ЖЕНА
+                </th>
+            </tr>
+        </thead>
+        @if (Model.zagsData != null)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        ПИН
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.pin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.pin)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Фамилия
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.newSurname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.newSurname)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Имя
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.newFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.newFirstName)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Отчество
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.newPatronymic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.newPatronymic)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Национальность
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.nationality)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.nationality)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Гражданство
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.citizenship)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.citizenship)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Место рождения
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.groom.placeOfBirth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.zagsData.bride.placeOfBirth)
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+
+@section scripts{
+    @Scripts.Render("~/chosen_v1.8.2/js")
+    <script>
+        $(function () {
+            $('#DistrictId').addClass('form-control').chosen();
+            $('#completeBtn').click(function (e) {
+                e.preventDefault();
+                $('#ActionNo').val(2);
+                $('form').submit();
+            });
+        })
+    </script>
+}

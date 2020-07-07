@@ -1,0 +1,1320 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChildrenAdoptionApi</name>
+    </assembly>
+    <members>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:ChildrenAdoptionApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,ChildrenAdoptionApi.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,ChildrenAdoptionApi.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},ChildrenAdoptionApi.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.#ctor(ChildrenAdoptionApi.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,ChildrenAdoptionApi.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:ChildrenAdoptionApi.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChildrenAdoptionApi.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Controllers.AdoptionOrdersController">
+            <summary>
+            Электронные приказы о передаче на временное опекунство
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.AdoptionOrdersController.GetByUserId(System.Guid)">
+            <summary>
+            Список приказов кандидата
+            </summary>
+            <param name="userId">Кандидат</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.AdoptionOrdersController.GetByOrgId(System.Guid)">
+            <summary>
+            Список приказов по району
+            </summary>
+            <param name="orgId">Район</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.AdoptionOrdersController.Reject(System.Int32,System.String)">
+            <summary>
+            Отклонить приказ о временной опеке
+            </summary>
+            <param name="orderId">Айди приказа</param>
+            <param name="reason">Причина отклонения</param>
+            <returns></returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Controllers.AvailableChildrenController">
+            <summary>
+            Сервис просмотра доступных детей
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.AvailableChildrenController.GetActiveList(System.Guid)">
+            <summary>
+            Получить список активных детей
+            </summary>
+            <param name="userId">Айди пользователя портала (из keycloack)</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.AvailableChildrenController.GetPhoto(System.Guid)">
+            <summary>
+            Фото ребенка
+            </summary>
+            <param name="childId">Ребенок</param>
+            <returns></returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Controllers.MeetupRequestsController">
+            <summary>
+            Запросы пользователей на встречу с ребенком
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.Create(System.Guid,System.Guid)">
+            <summary>
+            Создать запрос на встречу с ребенком
+            </summary>
+            <param name="childId">Ребенок</param>
+            <param name="userId">Кандидат</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetActiveRequestId(System.Guid)">
+            <summary>
+            Проверить наличие активного запроса у ребенка
+            </summary>
+            <param name="childId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.Join(System.Int32,System.Guid)">
+            <summary>
+            Создать запрос на встречу с ребенком
+            </summary>
+            <param name="meetupRequestId">Айди запроса на просмотр анкеты ребенка</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetByUserId(System.Guid)">
+            <summary>
+            Просмотр запросов кандидата
+            </summary>
+            <param name="userId">Кандидат</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetByChildId(System.Guid)">
+            <summary>
+            Просмотр запросов кандидата
+            </summary>
+            <param name="childId">Ребенок</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.Accept(System.Int32)">
+            <summary>
+            Одобрить запрос
+            </summary>
+            <param name="requestItemId">Айди элемента запроса</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.Delete(System.Int32)">
+            <summary>
+            Удалить запрос
+            </summary>
+            <param name="requestItemId">Айди заявки в запросе</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetRequestsByOrgId(System.Guid)">
+            <summary>
+            Просмотр запросов кандидата по району
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetNotificationsByOrgId(System.Guid)">
+            <summary>
+            Просмотр уведомлений на встречу
+            </summary>
+            <param name="orgId">Район</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetUnreadCount(System.Guid)">
+            <summary>
+            Кол-во непрочитанных уведомлений
+            </summary>
+            <param name="orgId">Район</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.SetRead(System.Int32)">
+            <summary>
+            Прочитать уведомление
+            </summary>
+            <param name="requestId">Айди запроса</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetVisitResult(System.Int32)">
+            <summary>
+            Просмотр результата посещения по айди запроса на встречу
+            </summary>
+            <param name="meetupRequestItemId">Айди запроса на встречу</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.SetVisitResult(ChildrenAdoptionApi.Models.ScriptExecutor.VisitResult)">
+            <summary>
+            Установить результат посещения ребенка
+            </summary>
+            <param name="result">Параметры результата</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.MeetupRequestsController.GetVisitResultsByOrgId(System.Guid)">
+            <summary>
+            Просмотр результатов посещения района
+            </summary>
+            <param name="orgId">Район</param>
+            <returns></returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Controllers.PortalUserController">
+            <summary>
+            Сведения о пользователе портала
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.PortalUserController.SetUser(System.Guid,System.Guid,System.String)">
+            <summary>
+            Добавить пользователя
+            </summary>
+            <param name="userId">Айд пользователя из системы Keycloak</param>
+            /// <param name="orgId">Айд района</param>
+            /// <param name="userName">Имя пользователя (ПИН)</param>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.PortalUserController.CanBeCreated(System.String)">
+            <summary>
+            Проверка перед созданием кандидата о наличии всего пакета документов
+            </summary>
+            <param name="pin">пин кандидата</param>
+            <returns>Имеет право на доступ к порталу или нет</returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.PortalUserController.GetAllUser">
+            <summary>
+            Просмотреть весь список пользователей
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.PortalUserController.GetCandidateById(System.Guid)">
+            <summary>
+            Получить информацию о кандидате по ПИН
+            </summary>
+            <param name="userId">Айд кандидата</param>
+            <returns></returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Controllers.UserStatusController">
+            <summary>
+            Просмотр статуса пользователя
+            </summary>
+        </member>
+        <member name="M:ChildrenAdoptionApi.Controllers.UserStatusController.Get(System.Guid)">
+            <summary>
+            Получить статус
+            </summary>
+            <param name="userId">Кандидат</param>
+            <returns></returns>
+        </member>
+        <member name="T:ChildrenAdoptionApi.AdpotionCandidate">
+            <summary>
+            Кандидат-пользователь
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdpotionCandidate.PortalUserId">
+            <summary>
+            Айди пользователя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdpotionCandidate.OrgId">
+            <summary>
+            Айди УСР
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdpotionCandidate.CreatedAt">
+            <summary>
+            Дата создания
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdpotionCandidate.UserName">
+            <summary>
+            Логин кандидата
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.MeetupRequest">
+            <summary>
+            Запрос на встречу с ребенком
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequest.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequest.CreatedAt">
+            <summary>
+            Дата запроса
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequest.ChildId">
+            <summary>
+            Айди ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequest.Unread">
+            <summary>
+            Прочитано?
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequest.MeetupRequestItems">
+            <summary>
+            Заявки кандидатов на встречу
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestDetails.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestDetails.CreatedAt">
+            <summary>
+            Дата запроса
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestDetails.ChildId">
+            <summary>
+            Айди ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestDetails.Unread">
+            <summary>
+            Прочитано?
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestDetails.MeetupRequestItems">
+            <summary>
+            Заявки кандидатов на встречу
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.MeetupRequestItem">
+            <summary>
+            Заявка кандидата к запросу на встречу
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.PortalUserId">
+            <summary>
+            Айди пользователя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.OrderNo">
+            <summary>
+            Номер позиции на встречу
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.CreatedAt">
+            <summary>
+            Дата заявки
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.CandidateFullName">
+            <summary>
+            Кандидат ФИО
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.CertificateDate">
+            <summary>
+            Дата выдачи заключения
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.DirectionId">
+            <summary>
+            Айди направления
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItem.VisitResultId">
+            <summary>
+            Айди результата посещения
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.PortalUserId">
+            <summary>
+            Айди пользователя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.OrderNo">
+            <summary>
+            Номер позиции на встречу
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.CreatedAt">
+            <summary>
+            Дата заявки
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.CandidateFullName">
+            <summary>
+            Кандидат ФИО
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.OrgName">
+            <summary>
+            Кандидат Район
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.CertificateDate">
+            <summary>
+            Дата выдачи заключения
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.VisitResult">
+            <summary>
+            Айди результата посещения
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.MeetupRequestItemDetails.DirectionId">
+            <summary>
+            Айди направления на посещения
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.AdoptionOrder">
+            <summary>
+            Заявка кандидата к запросу на встречу
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.Id">
+            <summary>
+            Айди приказа
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.No">
+            <summary>
+            Регистрационный номер приказа
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.Date">
+            <summary>
+            Дата вступления приказа (+ 1 день с момента согласи на усыновление)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.MeetupRequestItemId">
+            <summary>
+            Айди заявки из запроса на ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.MeetupRequestItem">
+            <summary>
+            Данные заявки из запроса на ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.IsRejected">
+            <summary>
+            Отклонен?
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.AdoptionOrder.RejectReason">
+            <summary>
+            Причина отклонения
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem">
+            <summary>
+            Элемент списка детей
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.RegDate">
+            <summary>
+            Дата постановки на учет
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.OrgId">
+            <summary>
+            Айди организации УСР
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.DocumentId">
+            <summary>
+            Айди записи
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.Age">
+            <summary>
+            Возраст ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.Gender">
+            <summary>
+            Пол ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.Nationality">
+            <summary>
+            Национальность
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.PrimetyRebenka">
+            <summary>
+            Приметы
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.Character">
+            <summary>
+            Характер
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItem.Diagnosis">
+            <summary>
+            Состояние здоровья
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.OrgName">
+            <summary>
+            Айди организации УСР
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.Age">
+            <summary>
+            Возраст ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.Gender">
+            <summary>
+            Пол ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.Nationality">
+            <summary>
+            Национальность
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.PrimetyRebenka">
+            <summary>
+            Приметы
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.Character">
+            <summary>
+            Характер
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AvailableChildrenItemDetail.Diagnosis">
+            <summary>
+            Состояние здоровья
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails">
+            <summary>
+            Анкета кандидата
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.OrgName">
+            <summary>
+            УСР кандидата
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.OrgId">
+            <summary>
+            Айди района
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.CertificateDate">
+            <summary>
+            Дата выдачи заключения
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.ManagerName">
+            <summary>
+            Начальник УСР
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.RegDate">
+            <summary>
+            Дата постановки на учет
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.ApplicantPerson">
+            <summary>
+            Заявитель
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.Telephone">
+            <summary>
+            Телефон
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.ApplicantJobDetails">
+            <summary>
+            Место работы, вид деятельности заявителя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.IsApplicantEmployed">
+            <summary>
+            Заявитель работает
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.ApplicantUnemployedReason">
+            <summary>
+            Причины не занятости заявителя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.ApplicantWorkNature1">
+            <summary>
+            Характер работы заявителя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.ApplicantWorkNature2">
+            <summary>
+            Тип работы заявителя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.SpousePerson">
+            <summary>
+            Супруг (а)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.SpouseJobDetails">
+            <summary>
+            Место работы, вид деятельности супруга (и)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.IsSpouseEmployed">
+            <summary>
+            Супруг(а) работает
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.SpouseUnemployedReason">
+            <summary>
+            Причины не занятости супруга (и)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.SpouseWorkNature1">
+            <summary>
+            Характер работы супруга(и)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.SpouseWorkNature2">
+            <summary>
+            Тип работы супруга(и)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.CandidateDetails.AddressDetails">
+            <summary>
+            Адрес фактического проживания
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails">
+            <summary>
+            Адресные данные
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.Area">
+            <summary>
+            Область
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.District">
+            <summary>
+            Район
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.Settlement">
+            <summary>
+            Айылный аймак
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.Village">
+            <summary>
+            Населенный пункт
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.Street">
+            <summary>
+            Улица (мкр, ж-м)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.House">
+            <summary>
+            Дом (корпус, строение)
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.AddressDetails.Apartment">
+            <summary>
+            Квартира
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.Person">
+            <summary>
+            Физ. лицо
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.PIN">
+            <summary>
+            ПИН
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.LastName">
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.FirstName">
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.MiddleName">
+            <summary>
+            Отчество
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.PassportNo">
+            <summary>
+            Номер, серия паспорта
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.PassportOrg">
+            <summary>
+            Выдавший орган
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.Person.PassportDate">
+            <summary>
+            Дата выдачи
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails">
+            <summary>
+            Анкета ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.OrgName">
+            <summary>
+            Район ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.PIN">
+            <summary>
+            ПИН ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.LastName">
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.FirstName">
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.Age">
+            <summary>
+            Возраст ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.Gender">
+            <summary>
+            Пол ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.Nationality">
+            <summary>
+            Национальность
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.PrimetyRebenka">
+            <summary>
+            Приметы
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.Character">
+            <summary>
+            Характер
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.Diagnosis">
+            <summary>
+            Состояние здоровья
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.HouseName">
+            <summary>
+            Детское учреждение
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.Address">
+            <summary>
+            Адрес учреждения
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.OrphanageReason">
+            <summary>
+            Причина отсутствия родительского попечительства
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.RegDate">
+            <summary>
+            Дата постановки на учет
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason">
+            <summary>
+            Причины отсутствия родительского попечительства
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason1">
+            <summary>
+            Смерть родителей
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason2">
+            <summary>
+            Ограничение в родительских правах
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason3">
+            <summary>
+            Местонахождение не известно
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason4">
+            <summary>
+            Лишение родительских прав
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason5">
+            <summary>
+            Заявление о согласии на усыновление/удочерение
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason6">
+            <summary>
+            Оставленный/брошенный
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason7">
+            <summary>
+            В связи с признанием родителей недееспособными
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails._OrphanageReason.OrphanageReason8">
+            <summary>
+            Родители, в местах лишения свободы
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.OrphanType">
+            <summary>
+            Статус сирота
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.ChildDetails.PossibleAdoptionType">
+            <summary>
+            Возможные формы устройства ребенка
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResult">
+            <summary>
+            Результат посещения ребенка
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResult.RegDate">
+            <summary>
+            Дата регистрации
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResult.MeetupRequestItemId">
+            <summary>
+            Айди запроса встречи
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResult.CandidateSolutionId">
+            <summary>
+            Решение кандидата
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResult.RefuseReason">
+            <summary>
+            Причина отказа
+            </summary>
+        </member>
+        <member name="T:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResultDetails">
+            <summary>
+            Просмотр результата посещений
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResultDetails.MeetupRequest">
+            <summary>
+            Направление
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResultDetails.CandidateSolution">
+            <summary>
+            Решение кандидата
+            </summary>
+        </member>
+        <member name="P:ChildrenAdoptionApi.Models.ScriptExecutor.VisitResultDetails.RefuseReason">
+            <summary>
+            Причина отказа
+            </summary>
+        </member>
+    </members>
+</doc>

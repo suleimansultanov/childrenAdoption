@@ -1,0 +1,81 @@
+﻿@model ChildrenAdoptionApi.Controllers.MSECRequest
+@{
+    ViewBag.Title = "Проверка наличия МСЭК-справки";
+}
+
+<h2>Проверка наличия МСЭК-справки</h2>
+@using (Html.BeginForm())
+{
+    <div style="padding:5px; margin: 0px auto">
+        @Html.TextBoxFor(model => model.PIN, new { @class = "form-control", placeholder = "ПИН" })
+        <button type="submit" class="btn btn-primary">ЗАПРОСИТЬ СПРАВКУ</button>
+    </div>
+}
+<table class="table table-hover table-striped" style="max-width: 800px;">
+    <tbody>
+        <tr>
+            <td>
+                МСЭК
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.OrganizationName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Дата освидетельствования
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.ExaminationDate)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Группа
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.DisabilityGroup)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Тип
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.ExaminationType)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Инвалидность С
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.From)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                По
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.To)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Очередное переосвидетельствование
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.ReExamination)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Нуждается в постоянном уходе и надзоре
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.msecData.PostoronniyUhod)
+            </td>
+        </tr>
+    </tbody>
+</table>
