@@ -1,0 +1,126 @@
+
+get_show_content('.mce-content-body-service');
+get_show_content('.mce-content-body-deportament',100);
+
+function get_show_content(name_block='',height_def=230){
+
+    $(name_block+' .btn-content-open').on('click',function(){
+    var height = $(name_block).height();
+    if (height <= height_def) {
+        $(name_block+' .btn-content-open img').addClass('btn-close-content');
+        $(this).addClass('btn-close-contents');
+        $(name_block).css('overflow','none').css('height','auto');
+    }else{
+        $(name_block+' .btn-content-open img').removeClass('btn-close-content');
+        $(this).removeClass('btn-close-contents');
+        $(name_block).css('overflow','hidden').css('height',height_def+'px');
+    }
+    
+});
+}
+$('.block-info').on('click',function (e){
+    e.preventDefault();
+    var block = '';
+    $.post('/ajax/get_block_info',{block:block},function (data){
+        data = jQuery.parseJSON(data);
+        $('.title-chavo').html(data.title);
+        $('.description-chavo').html(data.description);
+        $('#modal-1').css('display','block');
+    });
+});
+
+$('.get-chavo').on('click',function (e){
+    e.preventDefault();
+    var id = $(this).attr('id');
+    $.post('/ajax/get_chavo',{id:id},function (data){
+        data = jQuery.parseJSON(data);
+        $('.title-chavo').html(data.title);
+        $('.description-chavo').html(data.description).css({
+            display: 'block',
+        });
+        $('#modal-1').css('display','block');
+    });
+});
+$('.get-application').on('click',function (e){
+    e.preventDefault();
+    $('.title-chavo').html("В настоящее время находится в разработке.");
+    $('.description-chavo').html("").css({
+        display: 'none',
+    });
+    $('#modal-1').css('display','block');
+});
+$('.md-overlay').on('click',function (){
+    $('#modal-1').css('display','none');
+});
+
+$(window).scroll(function() {
+    $('.mov').each(function(){
+        var imagePos = $(this).offset().top;
+        var topOfWindow = $(window).scrollTop();
+        if (imagePos < topOfWindow+750) {
+            $(this).addClass('fadeInUpBig');
+        }
+    });
+});
+$('.type_face').on('change',function (){
+    var id = $(this).val();
+    var curent_page = $("#curent_page").val();
+    $.post('/ajax/set_face', {id: id}, function(data) {
+        setTimeout(function (){
+            window.location = "/"+curent_page;
+        }, 300);
+        
+    });
+});
+$('.type_cat').on('change',function (){
+    var id = $(this).val();
+    $.post('/ajax/set_type_catalog', {id: id}, function(data) {
+        setTimeout(function (){
+            window.location = "/catalog";
+        }, 300);
+        
+    });
+});
+$('.service-list-type ul li a').on('click',function (e){
+    $('.service-list-type ul li a').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
+    var id = $(this).attr('id');
+    var curent_page = $('#curent_page').val();
+    var list = this;
+    $.ajax({
+        url: '/ajax/set_type_view_catalog',
+        type: 'POST',
+        dataType: 'html',
+        data: {id:id,curent_page:curent_page},
+        success: function (data){
+            setTimeout(function (){
+                $(list).removeClass('loader-list-before');
+                $('.content-page-catalog').html(data);
+            }, 700);
+            
+        },
+        beforeSend:function (){
+            $(list).addClass('loader-list-before');
+        }
+    });
+    
+});
+$('.type_lang').on('change',function (){
+    // $('.language-bar ul li').removeClass('active');
+    var id = $(this).val();
+    var curent_page = $("#curent_page").val();
+    $.post('/ajax/set_lang', {id: id}, function(data) {
+        window.location = '/'+curent_page;
+    });
+    // $(this).addClass('active');
+    // if (id == 1) {
+    //     $('.box-logo-main').html('<svg style="height: 37px;width: 233px;font-weight: bold;font-size: 19px;"  viewBox="7 -15 229 64" preserveAspectRatio="xMaxYMax slice" ><use xlink:href="/assets/img/logo_rus.svg#logo_rus" fill="#fff"/></svg>');
+    // }else if(id == 2){
+    //     $('.box-logo-main').html('<svg style="height: 37px;width: 271px;font-weight: bold;font-size: 19px;"  viewBox="6 -18 229 64" preserveAspectRatio="xMaxYMax slice" ><use xlink:href="/assets/img/logo_kyr.svg#logo_kyr" fill="#fff"/></svg>');
+    // }else if(id == 3){
+    //     $('.box-logo-main').html('<svg style="height: 37px;width: 228px;font-weight: bold;font-size: 18px;"  viewBox="7 -14 229 64" preserveAspectRatio="xMaxYMax slice" ><use xlink:href="/assets/img/logo_eng.svg#logo_eng" fill="#fff"/></svg>');
+    // }
+
+    
+});
